@@ -12,6 +12,7 @@
           <Property Name="id_authorization" Type="int8" Nullable="false" />
           <Property Name="login" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="password" Type="text" Nullable="false" />
+          <Property Name="id_role" Type="int8" />
         </EntityType>
         <EntityType Name="Dogovori">
           <Key>
@@ -66,6 +67,13 @@
           <Property Name="email" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="Opisanie_kompani" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="kontaknote_litso" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int8" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Sobesedovanie">
           <Key>
@@ -148,6 +156,18 @@
           <Property Name="id_status" Type="int8" Nullable="false" />
           <Property Name="id_rabotadateley" Type="int8" Nullable="false" />
         </EntityType>
+        <Association Name="authorization_id_role_fkey">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="authorization" Type="Self.authorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="authorization">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Dogovori_id_rabotadatel_fkey">
           <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
           <End Role="Dogovori" Type="Self.Dogovori" Multiplicity="*" />
@@ -408,6 +428,7 @@
           <EntitySet Name="Otklki_Soskateley" EntityType="Self.Otklki_Soskateley" Schema="public" store:Type="Tables" />
           <EntitySet Name="Predlozhenie_o_rabote" EntityType="Self.Predlozhenie_o_rabote" Schema="public" store:Type="Tables" />
           <EntitySet Name="rabotadatel" EntityType="Self.rabotadatel" Schema="public" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="public" store:Type="Tables" />
           <EntitySet Name="Sobesedovanie" EntityType="Self.Sobesedovanie" Schema="public" store:Type="Tables" />
           <EntitySet Name="soiskateli" EntityType="Self.soiskateli" Schema="public" store:Type="Tables" />
           <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" Schema="public" store:Type="Tables" />
@@ -415,6 +436,10 @@
           <EntitySet Name="Uslugi" EntityType="Self.Uslugi" Schema="public" store:Type="Tables" />
           <EntitySet Name="Vakansi" EntityType="Self.Vakansi" Schema="public" store:Type="Tables" />
           <EntitySet Name="zayavki_rabotadateley" EntityType="Self.zayavki_rabotadateley" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="authorization_id_role_fkey" Association="Self.authorization_id_role_fkey">
+            <End Role="role" EntitySet="role" />
+            <End Role="authorization" EntitySet="authorization" />
+          </AssociationSet>
           <AssociationSet Name="Dogovori_id_rabotadatel_fkey" Association="Self.Dogovori_id_rabotadatel_fkey">
             <End Role="rabotadatel" EntitySet="rabotadatel" />
             <End Role="Dogovori" EntitySet="Dogovori" />
@@ -512,6 +537,8 @@
           <Property Name="id_authorization" Type="Int64" Nullable="false" />
           <Property Name="login" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_role" Type="Int64" />
+          <NavigationProperty Name="role" Relationship="Self.authorization_id_role_fkey" FromRole="authorization" ToRole="role" />
           <NavigationProperty Name="soiskateli" Relationship="Self.soiskateli_id_authorization_fkey" FromRole="authorization" ToRole="soiskateli" />
           <NavigationProperty Name="Sotrudniki" Relationship="Self.Sotrudniki_id_authorization_fkey" FromRole="authorization" ToRole="Sotrudniki" />
         </EntityType>
@@ -588,6 +615,14 @@
           <NavigationProperty Name="rabotadatel2" Relationship="Self.rabotadatel_id_rabotadatel_fkey" FromRole="rabotadatel1" ToRole="rabotadatel" />
           <NavigationProperty Name="Vakansi" Relationship="Self.Vakansi_id_rabotadatel_fkey" FromRole="rabotadatel" ToRole="Vakansi" />
           <NavigationProperty Name="zayavki_rabotadateley" Relationship="Self.zayavki_rabotadateley_id_rabotadateley_fkey" FromRole="rabotadatel" ToRole="zayavki_rabotadateley" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int64" Nullable="false" />
+          <Property Name="role1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="authorization" Relationship="Self.authorization_id_role_fkey" FromRole="role" ToRole="authorization" />
         </EntityType>
         <EntityType Name="Sobesedovanie">
           <Key>
@@ -690,6 +725,18 @@
           <NavigationProperty Name="status" Relationship="Self.zayavki_rabotadateley_id_status_fkey" FromRole="zayavki_rabotadateley" ToRole="status" />
           <NavigationProperty Name="Uslugi" Relationship="Self.zayavki_rabotadateley_id_usluga_fkey" FromRole="zayavki_rabotadateley" ToRole="Uslugi" />
         </EntityType>
+        <Association Name="authorization_id_role_fkey">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="authorization" Type="Self.authorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="authorization">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="soiskateli_id_authorization_fkey">
           <End Role="authorization" Type="Self.authorization" Multiplicity="1" />
           <End Role="soiskateli" Type="Self.soiskateli" Multiplicity="*" />
@@ -950,6 +997,7 @@
           <EntitySet Name="Otklki_Soskateley" EntityType="Self.Otklki_Soskateley" />
           <EntitySet Name="Predlozhenie_o_rabote" EntityType="Self.Predlozhenie_o_rabote" />
           <EntitySet Name="rabotadatel" EntityType="Self.rabotadatel" />
+          <EntitySet Name="role" EntityType="Self.role" />
           <EntitySet Name="Sobesedovanie" EntityType="Self.Sobesedovanie" />
           <EntitySet Name="soiskateli" EntityType="Self.soiskateli" />
           <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" />
@@ -957,6 +1005,10 @@
           <EntitySet Name="Uslugi" EntityType="Self.Uslugi" />
           <EntitySet Name="Vakansi" EntityType="Self.Vakansi" />
           <EntitySet Name="zayavki_rabotadateley" EntityType="Self.zayavki_rabotadateley" />
+          <AssociationSet Name="authorization_id_role_fkey" Association="Self.authorization_id_role_fkey">
+            <End Role="role" EntitySet="role" />
+            <End Role="authorization" EntitySet="authorization" />
+          </AssociationSet>
           <AssociationSet Name="soiskateli_id_authorization_fkey" Association="Self.soiskateli_id_authorization_fkey">
             <End Role="authorization" EntitySet="authorization" />
             <End Role="soiskateli" EntitySet="soiskateli" />
@@ -1054,6 +1106,7 @@
                 <ScalarProperty Name="id_authorization" ColumnName="id_authorization" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1114,6 +1167,14 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="Opisanie_kompani" ColumnName="Opisanie_kompani" />
                 <ScalarProperty Name="kontaknote_litso" ColumnName="kontaknote_litso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role">
+            <EntityTypeMapping TypeName="bazaModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="role1" ColumnName="role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

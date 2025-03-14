@@ -5,9 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:цдовым"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Кадровое Агентсво" Height="450" Width="800">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF444444"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <!--<DataGrid x:Name="datagrid" d:ItemsSource="{d:SampleData ItemCount=5}"/>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" OpacityMask="#FFBCCEFB" Cursor="No">
+            <Button x:Name="btnBack" Content="Назад"  HorizontalAlignment="Left" Cursor="Hand" Click="btnBack_Click" Margin="678,10,0,9" Width="120" RenderTransformOrigin="0.507,0.744" Background="{x:Null}"/>
+            <Image HorizontalAlignment="Left" Margin="10,7,0,7" Width="45"  Source="/Resourced/OIP.jpg"/>
+        </Grid>
+        <Frame Background="#FFD2D2D2" x:Name="fr_content" Grid.Row="1" NavigationUIVisibility="Hidden" ContentRendered="fr_content_ContentRendered" Navigated="fr_content_Navigated" Cursor="" />
 
     </Grid>
 </Window>

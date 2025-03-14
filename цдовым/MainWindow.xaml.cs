@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using цдовым.Models;
+using цдовым.Pages;
 
 namespace цдовым
 {
@@ -24,7 +25,10 @@ namespace цдовым
         public MainWindow()
         {
             InitializeComponent();
-            CheckDatabaseConnection(); // Проверка подключения при запуске
+            fr_content.Content = new Autho();
+
+            //CheckDatabaseConnection(); // Проверка подключения при запуске
+
 
         }
         private void CheckDatabaseConnection()
@@ -50,5 +54,35 @@ namespace цдовым
                 MessageBox.Show($"Ошибка подключения к базе данных: {ex.Message}");
             }
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+
+
+        {
+            fr_content.GoBack();
+
+
+        }
+
+        private void fr_content_Navigated(object sender, NavigationEventArgs e)
+        {
+            if (fr_content.CanGoBack)
+                btnBack.Visibility = Visibility.Visible;
+            else
+                btnBack.Visibility = Visibility.Hidden;
+
+
+        }
+
+        private void fr_content_ContentRendered(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
+
 }

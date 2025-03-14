@@ -12,24 +12,18 @@ namespace цдовым.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class authorization
+    public partial class role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public authorization()
+        public role()
         {
-            this.soiskateli = new HashSet<soiskateli>();
-            this.Sotrudniki = new HashSet<Sotrudniki>();
+            this.authorization = new HashSet<authorization>();
         }
     
-        public long id_authorization { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
-        public Nullable<long> id_role { get; set; }
+        public long id_role { get; set; }
+        public string role1 { get; set; }
     
-        public virtual role role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<soiskateli> soiskateli { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sotrudniki> Sotrudniki { get; set; }
+        public virtual ICollection<authorization> authorization { get; set; }
     }
 }
