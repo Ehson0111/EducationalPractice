@@ -1,0 +1,1231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище bazaModel" Provider="Npgsql" ProviderManifestToken="17.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="authorization">
+          <Key>
+            <PropertyRef Name="id_authorization" />
+          </Key>
+          <Property Name="id_authorization" Type="int8" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="password" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dogovori">
+          <Key>
+            <PropertyRef Name="id_Dogovor" />
+          </Key>
+          <Property Name="id_Dogovor" Type="int8" Nullable="false" />
+          <Property Name="id_rabotadatel" Type="int8" Nullable="false" />
+          <Property Name="id_Uslugi" Type="int8" Nullable="false" />
+          <Property Name="data_zakluchenite" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dolzhnost">
+          <Key>
+            <PropertyRef Name="id_Dolzhnoest" />
+          </Key>
+          <Property Name="id_Dolzhnoest" Type="int8" Nullable="false" />
+          <Property Name="Dolzhnoest_namimenovanie" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="itog_sobesedovanie">
+          <Key>
+            <PropertyRef Name="id_itog" />
+          </Key>
+          <Property Name="id_itog" Type="int8" Nullable="false" />
+          <Property Name="tip_itog" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Otklki_Soskateley">
+          <Key>
+            <PropertyRef Name="id_otklil" />
+          </Key>
+          <Property Name="id_otklil" Type="int8" Nullable="false" />
+          <Property Name="id_soiskatel" Type="int8" Nullable="false" />
+          <Property Name="id_vakansi" Type="int8" Nullable="false" />
+          <Property Name="id_status" Type="int8" Nullable="false" />
+          <Property Name="data_otklik" Type="timestamp" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Predlozhenie_o_rabote">
+          <Key>
+            <PropertyRef Name="id_predlozhenite" />
+          </Key>
+          <Property Name="id_predlozhenite" Type="int8" Nullable="false" />
+          <Property Name="id_otklik" Type="int8" Nullable="false" />
+          <Property Name="id_status" Type="int8" Nullable="false" />
+          <Property Name="id_rabotadatel" Type="int8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rabotadatel">
+          <Key>
+            <PropertyRef Name="id_rabotadatel" />
+          </Key>
+          <Property Name="id_rabotadatel" Type="int8" Nullable="false" />
+          <Property Name="naimenovaine_company" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="kontaknie_danniw" Type="int4" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Opisanie_kompani" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="kontaknote_litso" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sobesedovanie">
+          <Key>
+            <PropertyRef Name="id_sobesedovanie" />
+          </Key>
+          <Property Name="id_sobesedovanie" Type="int8" Nullable="false" />
+          <Property Name="id_otklik" Type="int8" Nullable="false" />
+          <Property Name="data_sobesedovanie" Type="timestamptz" Precision="6" Nullable="false" />
+          <Property Name="lokatsiya" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_status" Type="int8" Nullable="false" />
+          <Property Name="id_itog" Type="int8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="soiskateli">
+          <Key>
+            <PropertyRef Name="id_soiskatel" />
+          </Key>
+          <Property Name="id_soiskatel" Type="int8" Nullable="false" />
+          <Property Name="familiya" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Imya" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Othcestvo" Type="varchar" MaxLength="20" />
+          <Property Name="data_rozhdenie" Type="date" Nullable="false" />
+          <Property Name="address" Type="text" Nullable="false" />
+          <Property Name="phone" Type="int4" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Obrazavanie" Type="text" Nullable="false" />
+          <Property Name="opit_Raboti" Type="text" Nullable="false" />
+          <Property Name="navik" Type="text" Nullable="false" />
+          <Property Name="dopolnitelnie_dannie" Type="text" Nullable="false" />
+          <Property Name="id_authorization" Type="int8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sotrudniki">
+          <Key>
+            <PropertyRef Name="id_Sotrudnik" />
+          </Key>
+          <Property Name="id_Sotrudnik" Type="int8" Nullable="false" />
+          <Property Name="Familiya" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Imya" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Otchestvo" Type="varchar" MaxLength="30" />
+          <Property Name="kontakti" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="pasportnie_dannie" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="zarplata" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="id_authorization" Type="int8" Nullable="false" />
+          <Property Name="id_dolzhnost" Type="int8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="int8" Nullable="false" />
+          <Property Name="status_naimenovanit" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Uslugi">
+          <Key>
+            <PropertyRef Name="id_uslugi" />
+          </Key>
+          <Property Name="id_uslugi" Type="int8" Nullable="false" />
+          <Property Name="uslugi_name" Type="text" Nullable="false" />
+          <Property Name="tsena" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vakansi">
+          <Key>
+            <PropertyRef Name="id_vakansiy" />
+          </Key>
+          <Property Name="id_vakansiy" Type="int8" Nullable="false" />
+          <Property Name="id_rabotadatel" Type="int8" Nullable="false" />
+          <Property Name="nazvaie_vakansii" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Opisanie" Type="text" Nullable="false" />
+          <Property Name="trebovanie" Type="text" Nullable="false" />
+          <Property Name="open_data" Type="date" Nullable="false" />
+          <Property Name="id_status" Type="int8" Nullable="false" />
+          <Property Name="zarplata1" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="zayavki_rabotadateley">
+          <Key>
+            <PropertyRef Name="id_zayavka" />
+          </Key>
+          <Property Name="id_zayavka" Type="int8" Nullable="false" />
+          <Property Name="id_usluga" Type="int8" Nullable="false" />
+          <Property Name="id_status" Type="int8" Nullable="false" />
+          <Property Name="id_rabotadateley" Type="int8" Nullable="false" />
+        </EntityType>
+        <Association Name="Dogovori_id_rabotadatel_fkey">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="Dogovori" Type="Self.Dogovori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="Dogovori">
+              <PropertyRef Name="id_rabotadatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Dogovori_id_Uslugi_fkey">
+          <End Role="Uslugi" Type="Self.Uslugi" Multiplicity="1" />
+          <End Role="Dogovori" Type="Self.Dogovori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uslugi">
+              <PropertyRef Name="id_uslugi" />
+            </Principal>
+            <Dependent Role="Dogovori">
+              <PropertyRef Name="id_Uslugi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Otklki_Soskateley_id_soiskatel_fkey">
+          <End Role="soiskateli" Type="Self.soiskateli" Multiplicity="1" />
+          <End Role="Otklki_Soskateley" Type="Self.Otklki_Soskateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soiskateli">
+              <PropertyRef Name="id_soiskatel" />
+            </Principal>
+            <Dependent Role="Otklki_Soskateley">
+              <PropertyRef Name="id_soiskatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Otklki_Soskateley_id_status_fkey">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="Otklki_Soskateley" Type="Self.Otklki_Soskateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Otklki_Soskateley">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Otklki_Soskateley_id_vakansi_fkey">
+          <End Role="Vakansi" Type="Self.Vakansi" Multiplicity="1" />
+          <End Role="Otklki_Soskateley" Type="Self.Otklki_Soskateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vakansi">
+              <PropertyRef Name="id_vakansiy" />
+            </Principal>
+            <Dependent Role="Otklki_Soskateley">
+              <PropertyRef Name="id_vakansi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Predlozhenie_o_rabote_id_otklik_fkey">
+          <End Role="Otklki_Soskateley" Type="Self.Otklki_Soskateley" Multiplicity="1" />
+          <End Role="Predlozhenie_o_rabote" Type="Self.Predlozhenie_o_rabote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otklki_Soskateley">
+              <PropertyRef Name="id_otklil" />
+            </Principal>
+            <Dependent Role="Predlozhenie_o_rabote">
+              <PropertyRef Name="id_otklik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Predlozhenie_o_rabote_id_rabotadatel_fkey">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="Predlozhenie_o_rabote" Type="Self.Predlozhenie_o_rabote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="Predlozhenie_o_rabote">
+              <PropertyRef Name="id_rabotadatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Predlozhenie_o_rabote_id_rabotadatel_fkey1">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="Predlozhenie_o_rabote" Type="Self.Predlozhenie_o_rabote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="Predlozhenie_o_rabote">
+              <PropertyRef Name="id_rabotadatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Predlozhenie_o_rabote_id_status_fkey">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="Predlozhenie_o_rabote" Type="Self.Predlozhenie_o_rabote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Predlozhenie_o_rabote">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rabotadatel_id_rabotadatel_fkey">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="rabotadatel1" Type="Self.rabotadatel" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="rabotadatel1">
+              <PropertyRef Name="id_rabotadatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sobesedovanie_id_itog_fkey">
+          <End Role="itog_sobesedovanie" Type="Self.itog_sobesedovanie" Multiplicity="1" />
+          <End Role="Sobesedovanie" Type="Self.Sobesedovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="itog_sobesedovanie">
+              <PropertyRef Name="id_itog" />
+            </Principal>
+            <Dependent Role="Sobesedovanie">
+              <PropertyRef Name="id_itog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sobesedovanie_id_otklik_fkey">
+          <End Role="Otklki_Soskateley" Type="Self.Otklki_Soskateley" Multiplicity="1" />
+          <End Role="Sobesedovanie" Type="Self.Sobesedovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otklki_Soskateley">
+              <PropertyRef Name="id_otklil" />
+            </Principal>
+            <Dependent Role="Sobesedovanie">
+              <PropertyRef Name="id_otklik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sobesedovanie_id_status_fkey">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="Sobesedovanie" Type="Self.Sobesedovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Sobesedovanie">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="soiskateli_id_authorization_fkey">
+          <End Role="authorization" Type="Self.authorization" Multiplicity="1" />
+          <End Role="soiskateli" Type="Self.soiskateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="authorization">
+              <PropertyRef Name="id_authorization" />
+            </Principal>
+            <Dependent Role="soiskateli">
+              <PropertyRef Name="id_authorization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sotrudniki_id_authorization_fkey">
+          <End Role="authorization" Type="Self.authorization" Multiplicity="1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="authorization">
+              <PropertyRef Name="id_authorization" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="id_authorization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sotrudniki_id_dolzhnost_fkey">
+          <End Role="Dolzhnost" Type="Self.Dolzhnost" Multiplicity="1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolzhnost">
+              <PropertyRef Name="id_Dolzhnoest" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="id_dolzhnost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Vakansi_id_rabotadatel_fkey">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="Vakansi" Type="Self.Vakansi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="Vakansi">
+              <PropertyRef Name="id_rabotadatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Vakansi_id_status_fkey">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="Vakansi" Type="Self.Vakansi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Vakansi">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="zayavki_rabotadateley_id_rabotadateley_fkey">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="zayavki_rabotadateley" Type="Self.zayavki_rabotadateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="zayavki_rabotadateley">
+              <PropertyRef Name="id_rabotadateley" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="zayavki_rabotadateley_id_status_fkey">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="zayavki_rabotadateley" Type="Self.zayavki_rabotadateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="zayavki_rabotadateley">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="zayavki_rabotadateley_id_usluga_fkey">
+          <End Role="Uslugi" Type="Self.Uslugi" Multiplicity="1" />
+          <End Role="zayavki_rabotadateley" Type="Self.zayavki_rabotadateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uslugi">
+              <PropertyRef Name="id_uslugi" />
+            </Principal>
+            <Dependent Role="zayavki_rabotadateley">
+              <PropertyRef Name="id_usluga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище bazaModelContainer">
+          <EntitySet Name="authorization" EntityType="Self.authorization" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Dogovori" EntityType="Self.Dogovori" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Dolzhnost" EntityType="Self.Dolzhnost" Schema="public" store:Type="Tables" />
+          <EntitySet Name="itog_sobesedovanie" EntityType="Self.itog_sobesedovanie" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Otklki_Soskateley" EntityType="Self.Otklki_Soskateley" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Predlozhenie_o_rabote" EntityType="Self.Predlozhenie_o_rabote" Schema="public" store:Type="Tables" />
+          <EntitySet Name="rabotadatel" EntityType="Self.rabotadatel" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Sobesedovanie" EntityType="Self.Sobesedovanie" Schema="public" store:Type="Tables" />
+          <EntitySet Name="soiskateli" EntityType="Self.soiskateli" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" Schema="public" store:Type="Tables" />
+          <EntitySet Name="status" EntityType="Self.status" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Uslugi" EntityType="Self.Uslugi" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Vakansi" EntityType="Self.Vakansi" Schema="public" store:Type="Tables" />
+          <EntitySet Name="zayavki_rabotadateley" EntityType="Self.zayavki_rabotadateley" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="Dogovori_id_rabotadatel_fkey" Association="Self.Dogovori_id_rabotadatel_fkey">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="Dogovori" EntitySet="Dogovori" />
+          </AssociationSet>
+          <AssociationSet Name="Dogovori_id_Uslugi_fkey" Association="Self.Dogovori_id_Uslugi_fkey">
+            <End Role="Uslugi" EntitySet="Uslugi" />
+            <End Role="Dogovori" EntitySet="Dogovori" />
+          </AssociationSet>
+          <AssociationSet Name="Otklki_Soskateley_id_soiskatel_fkey" Association="Self.Otklki_Soskateley_id_soiskatel_fkey">
+            <End Role="soiskateli" EntitySet="soiskateli" />
+            <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
+          </AssociationSet>
+          <AssociationSet Name="Otklki_Soskateley_id_status_fkey" Association="Self.Otklki_Soskateley_id_status_fkey">
+            <End Role="status" EntitySet="status" />
+            <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
+          </AssociationSet>
+          <AssociationSet Name="Otklki_Soskateley_id_vakansi_fkey" Association="Self.Otklki_Soskateley_id_vakansi_fkey">
+            <End Role="Vakansi" EntitySet="Vakansi" />
+            <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
+          </AssociationSet>
+          <AssociationSet Name="Predlozhenie_o_rabote_id_otklik_fkey" Association="Self.Predlozhenie_o_rabote_id_otklik_fkey">
+            <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
+            <End Role="Predlozhenie_o_rabote" EntitySet="Predlozhenie_o_rabote" />
+          </AssociationSet>
+          <AssociationSet Name="Predlozhenie_o_rabote_id_rabotadatel_fkey" Association="Self.Predlozhenie_o_rabote_id_rabotadatel_fkey">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="Predlozhenie_o_rabote" EntitySet="Predlozhenie_o_rabote" />
+          </AssociationSet>
+          <AssociationSet Name="Predlozhenie_o_rabote_id_rabotadatel_fkey1" Association="Self.Predlozhenie_o_rabote_id_rabotadatel_fkey1">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="Predlozhenie_o_rabote" EntitySet="Predlozhenie_o_rabote" />
+          </AssociationSet>
+          <AssociationSet Name="Predlozhenie_o_rabote_id_status_fkey" Association="Self.Predlozhenie_o_rabote_id_status_fkey">
+            <End Role="status" EntitySet="status" />
+            <End Role="Predlozhenie_o_rabote" EntitySet="Predlozhenie_o_rabote" />
+          </AssociationSet>
+          <AssociationSet Name="rabotadatel_id_rabotadatel_fkey" Association="Self.rabotadatel_id_rabotadatel_fkey">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="rabotadatel1" EntitySet="rabotadatel" />
+          </AssociationSet>
+          <AssociationSet Name="Sobesedovanie_id_itog_fkey" Association="Self.Sobesedovanie_id_itog_fkey">
+            <End Role="itog_sobesedovanie" EntitySet="itog_sobesedovanie" />
+            <End Role="Sobesedovanie" EntitySet="Sobesedovanie" />
+          </AssociationSet>
+          <AssociationSet Name="Sobesedovanie_id_otklik_fkey" Association="Self.Sobesedovanie_id_otklik_fkey">
+            <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
+            <End Role="Sobesedovanie" EntitySet="Sobesedovanie" />
+          </AssociationSet>
+          <AssociationSet Name="Sobesedovanie_id_status_fkey" Association="Self.Sobesedovanie_id_status_fkey">
+            <End Role="status" EntitySet="status" />
+            <End Role="Sobesedovanie" EntitySet="Sobesedovanie" />
+          </AssociationSet>
+          <AssociationSet Name="soiskateli_id_authorization_fkey" Association="Self.soiskateli_id_authorization_fkey">
+            <End Role="authorization" EntitySet="authorization" />
+            <End Role="soiskateli" EntitySet="soiskateli" />
+          </AssociationSet>
+          <AssociationSet Name="Sotrudniki_id_authorization_fkey" Association="Self.Sotrudniki_id_authorization_fkey">
+            <End Role="authorization" EntitySet="authorization" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
+          <AssociationSet Name="Sotrudniki_id_dolzhnost_fkey" Association="Self.Sotrudniki_id_dolzhnost_fkey">
+            <End Role="Dolzhnost" EntitySet="Dolzhnost" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
+          <AssociationSet Name="Vakansi_id_rabotadatel_fkey" Association="Self.Vakansi_id_rabotadatel_fkey">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="Vakansi" EntitySet="Vakansi" />
+          </AssociationSet>
+          <AssociationSet Name="Vakansi_id_status_fkey" Association="Self.Vakansi_id_status_fkey">
+            <End Role="status" EntitySet="status" />
+            <End Role="Vakansi" EntitySet="Vakansi" />
+          </AssociationSet>
+          <AssociationSet Name="zayavki_rabotadateley_id_rabotadateley_fkey" Association="Self.zayavki_rabotadateley_id_rabotadateley_fkey">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="zayavki_rabotadateley" EntitySet="zayavki_rabotadateley" />
+          </AssociationSet>
+          <AssociationSet Name="zayavki_rabotadateley_id_status_fkey" Association="Self.zayavki_rabotadateley_id_status_fkey">
+            <End Role="status" EntitySet="status" />
+            <End Role="zayavki_rabotadateley" EntitySet="zayavki_rabotadateley" />
+          </AssociationSet>
+          <AssociationSet Name="zayavki_rabotadateley_id_usluga_fkey" Association="Self.zayavki_rabotadateley_id_usluga_fkey">
+            <End Role="Uslugi" EntitySet="Uslugi" />
+            <End Role="zayavki_rabotadateley" EntitySet="zayavki_rabotadateley" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bazaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="authorization">
+          <Key>
+            <PropertyRef Name="id_authorization" />
+          </Key>
+          <Property Name="id_authorization" Type="Int64" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="soiskateli" Relationship="Self.soiskateli_id_authorization_fkey" FromRole="authorization" ToRole="soiskateli" />
+          <NavigationProperty Name="Sotrudniki" Relationship="Self.Sotrudniki_id_authorization_fkey" FromRole="authorization" ToRole="Sotrudniki" />
+        </EntityType>
+        <EntityType Name="Dogovori">
+          <Key>
+            <PropertyRef Name="id_Dogovor" />
+          </Key>
+          <Property Name="id_Dogovor" Type="Int64" Nullable="false" />
+          <Property Name="id_rabotadatel" Type="Int64" Nullable="false" />
+          <Property Name="id_Uslugi" Type="Int64" Nullable="false" />
+          <Property Name="data_zakluchenite" Type="DateTime" Precision="0" Nullable="false" />
+          <NavigationProperty Name="rabotadatel" Relationship="Self.Dogovori_id_rabotadatel_fkey" FromRole="Dogovori" ToRole="rabotadatel" />
+          <NavigationProperty Name="Uslugi" Relationship="Self.Dogovori_id_Uslugi_fkey" FromRole="Dogovori" ToRole="Uslugi" />
+        </EntityType>
+        <EntityType Name="Dolzhnost">
+          <Key>
+            <PropertyRef Name="id_Dolzhnoest" />
+          </Key>
+          <Property Name="id_Dolzhnoest" Type="Int64" Nullable="false" />
+          <Property Name="Dolzhnoest_namimenovanie" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sotrudniki" Relationship="Self.Sotrudniki_id_dolzhnost_fkey" FromRole="Dolzhnost" ToRole="Sotrudniki" />
+        </EntityType>
+        <EntityType Name="itog_sobesedovanie">
+          <Key>
+            <PropertyRef Name="id_itog" />
+          </Key>
+          <Property Name="id_itog" Type="Int64" Nullable="false" />
+          <Property Name="tip_itog" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sobesedovanie" Relationship="Self.Sobesedovanie_id_itog_fkey" FromRole="itog_sobesedovanie" ToRole="Sobesedovanie" />
+        </EntityType>
+        <EntityType Name="Otklki_Soskateley">
+          <Key>
+            <PropertyRef Name="id_otklil" />
+          </Key>
+          <Property Name="id_otklil" Type="Int64" Nullable="false" />
+          <Property Name="id_soiskatel" Type="Int64" Nullable="false" />
+          <Property Name="id_vakansi" Type="Int64" Nullable="false" />
+          <Property Name="id_status" Type="Int64" Nullable="false" />
+          <Property Name="data_otklik" Type="DateTime" Precision="6" Nullable="false" />
+          <NavigationProperty Name="soiskateli" Relationship="Self.Otklki_Soskateley_id_soiskatel_fkey" FromRole="Otklki_Soskateley" ToRole="soiskateli" />
+          <NavigationProperty Name="status" Relationship="Self.Otklki_Soskateley_id_status_fkey" FromRole="Otklki_Soskateley" ToRole="status" />
+          <NavigationProperty Name="Vakansi" Relationship="Self.Otklki_Soskateley_id_vakansi_fkey" FromRole="Otklki_Soskateley" ToRole="Vakansi" />
+          <NavigationProperty Name="Predlozhenie_o_rabote" Relationship="Self.Predlozhenie_o_rabote_id_otklik_fkey" FromRole="Otklki_Soskateley" ToRole="Predlozhenie_o_rabote" />
+          <NavigationProperty Name="Sobesedovanie" Relationship="Self.Sobesedovanie_id_otklik_fkey" FromRole="Otklki_Soskateley" ToRole="Sobesedovanie" />
+        </EntityType>
+        <EntityType Name="Predlozhenie_o_rabote">
+          <Key>
+            <PropertyRef Name="id_predlozhenite" />
+          </Key>
+          <Property Name="id_predlozhenite" Type="Int64" Nullable="false" />
+          <Property Name="id_otklik" Type="Int64" Nullable="false" />
+          <Property Name="id_status" Type="Int64" Nullable="false" />
+          <Property Name="id_rabotadatel" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Otklki_Soskateley" Relationship="Self.Predlozhenie_o_rabote_id_otklik_fkey" FromRole="Predlozhenie_o_rabote" ToRole="Otklki_Soskateley" />
+          <NavigationProperty Name="rabotadatel" Relationship="Self.Predlozhenie_o_rabote_id_rabotadatel_fkey" FromRole="Predlozhenie_o_rabote" ToRole="rabotadatel" />
+          <NavigationProperty Name="rabotadatel1" Relationship="Self.Predlozhenie_o_rabote_id_rabotadatel_fkey1" FromRole="Predlozhenie_o_rabote" ToRole="rabotadatel" />
+          <NavigationProperty Name="status" Relationship="Self.Predlozhenie_o_rabote_id_status_fkey" FromRole="Predlozhenie_o_rabote" ToRole="status" />
+        </EntityType>
+        <EntityType Name="rabotadatel">
+          <Key>
+            <PropertyRef Name="id_rabotadatel" />
+          </Key>
+          <Property Name="id_rabotadatel" Type="Int64" Nullable="false" />
+          <Property Name="naimenovaine_company" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kontaknie_danniw" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opisanie_kompani" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kontaknote_litso" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Dogovori" Relationship="Self.Dogovori_id_rabotadatel_fkey" FromRole="rabotadatel" ToRole="Dogovori" />
+          <NavigationProperty Name="Predlozhenie_o_rabote" Relationship="Self.Predlozhenie_o_rabote_id_rabotadatel_fkey" FromRole="rabotadatel" ToRole="Predlozhenie_o_rabote" />
+          <NavigationProperty Name="Predlozhenie_o_rabote1" Relationship="Self.Predlozhenie_o_rabote_id_rabotadatel_fkey1" FromRole="rabotadatel" ToRole="Predlozhenie_o_rabote" />
+          <NavigationProperty Name="rabotadatel1" Relationship="Self.rabotadatel_id_rabotadatel_fkey" FromRole="rabotadatel" ToRole="rabotadatel1" />
+          <NavigationProperty Name="rabotadatel2" Relationship="Self.rabotadatel_id_rabotadatel_fkey" FromRole="rabotadatel1" ToRole="rabotadatel" />
+          <NavigationProperty Name="Vakansi" Relationship="Self.Vakansi_id_rabotadatel_fkey" FromRole="rabotadatel" ToRole="Vakansi" />
+          <NavigationProperty Name="zayavki_rabotadateley" Relationship="Self.zayavki_rabotadateley_id_rabotadateley_fkey" FromRole="rabotadatel" ToRole="zayavki_rabotadateley" />
+        </EntityType>
+        <EntityType Name="Sobesedovanie">
+          <Key>
+            <PropertyRef Name="id_sobesedovanie" />
+          </Key>
+          <Property Name="id_sobesedovanie" Type="Int64" Nullable="false" />
+          <Property Name="id_otklik" Type="Int64" Nullable="false" />
+          <Property Name="data_sobesedovanie" Type="DateTimeOffset" Precision="6" Nullable="false" />
+          <Property Name="lokatsiya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_status" Type="Int64" Nullable="false" />
+          <Property Name="id_itog" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="itog_sobesedovanie" Relationship="Self.Sobesedovanie_id_itog_fkey" FromRole="Sobesedovanie" ToRole="itog_sobesedovanie" />
+          <NavigationProperty Name="Otklki_Soskateley" Relationship="Self.Sobesedovanie_id_otklik_fkey" FromRole="Sobesedovanie" ToRole="Otklki_Soskateley" />
+          <NavigationProperty Name="status" Relationship="Self.Sobesedovanie_id_status_fkey" FromRole="Sobesedovanie" ToRole="status" />
+        </EntityType>
+        <EntityType Name="soiskateli">
+          <Key>
+            <PropertyRef Name="id_soiskatel" />
+          </Key>
+          <Property Name="id_soiskatel" Type="Int64" Nullable="false" />
+          <Property Name="familiya" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Imya" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Othcestvo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="data_rozhdenie" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Obrazavanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="opit_Raboti" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="navik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dopolnitelnie_dannie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_authorization" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="authorization" Relationship="Self.soiskateli_id_authorization_fkey" FromRole="soiskateli" ToRole="authorization" />
+          <NavigationProperty Name="Otklki_Soskateley" Relationship="Self.Otklki_Soskateley_id_soiskatel_fkey" FromRole="soiskateli" ToRole="Otklki_Soskateley" />
+        </EntityType>
+        <EntityType Name="Sotrudniki">
+          <Key>
+            <PropertyRef Name="id_Sotrudnik" />
+          </Key>
+          <Property Name="id_Sotrudnik" Type="Int64" Nullable="false" />
+          <Property Name="Familiya" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Imya" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="kontakti" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pasportnie_dannie" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="zarplata" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="id_authorization" Type="Int64" Nullable="false" />
+          <Property Name="id_dolzhnost" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="authorization" Relationship="Self.Sotrudniki_id_authorization_fkey" FromRole="Sotrudniki" ToRole="authorization" />
+          <NavigationProperty Name="Dolzhnost" Relationship="Self.Sotrudniki_id_dolzhnost_fkey" FromRole="Sotrudniki" ToRole="Dolzhnost" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="Int64" Nullable="false" />
+          <Property Name="status_naimenovanit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Otklki_Soskateley" Relationship="Self.Otklki_Soskateley_id_status_fkey" FromRole="status" ToRole="Otklki_Soskateley" />
+          <NavigationProperty Name="Predlozhenie_o_rabote" Relationship="Self.Predlozhenie_o_rabote_id_status_fkey" FromRole="status" ToRole="Predlozhenie_o_rabote" />
+          <NavigationProperty Name="Sobesedovanie" Relationship="Self.Sobesedovanie_id_status_fkey" FromRole="status" ToRole="Sobesedovanie" />
+          <NavigationProperty Name="Vakansi" Relationship="Self.Vakansi_id_status_fkey" FromRole="status" ToRole="Vakansi" />
+          <NavigationProperty Name="zayavki_rabotadateley" Relationship="Self.zayavki_rabotadateley_id_status_fkey" FromRole="status" ToRole="zayavki_rabotadateley" />
+        </EntityType>
+        <EntityType Name="Uslugi">
+          <Key>
+            <PropertyRef Name="id_uslugi" />
+          </Key>
+          <Property Name="id_uslugi" Type="Int64" Nullable="false" />
+          <Property Name="uslugi_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tsena" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dogovori" Relationship="Self.Dogovori_id_Uslugi_fkey" FromRole="Uslugi" ToRole="Dogovori" />
+          <NavigationProperty Name="zayavki_rabotadateley" Relationship="Self.zayavki_rabotadateley_id_usluga_fkey" FromRole="Uslugi" ToRole="zayavki_rabotadateley" />
+        </EntityType>
+        <EntityType Name="Vakansi">
+          <Key>
+            <PropertyRef Name="id_vakansiy" />
+          </Key>
+          <Property Name="id_vakansiy" Type="Int64" Nullable="false" />
+          <Property Name="id_rabotadatel" Type="Int64" Nullable="false" />
+          <Property Name="nazvaie_vakansii" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opisanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="trebovanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="open_data" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="id_status" Type="Int64" Nullable="false" />
+          <Property Name="zarplata1" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Otklki_Soskateley" Relationship="Self.Otklki_Soskateley_id_vakansi_fkey" FromRole="Vakansi" ToRole="Otklki_Soskateley" />
+          <NavigationProperty Name="rabotadatel" Relationship="Self.Vakansi_id_rabotadatel_fkey" FromRole="Vakansi" ToRole="rabotadatel" />
+          <NavigationProperty Name="status" Relationship="Self.Vakansi_id_status_fkey" FromRole="Vakansi" ToRole="status" />
+        </EntityType>
+        <EntityType Name="zayavki_rabotadateley">
+          <Key>
+            <PropertyRef Name="id_zayavka" />
+          </Key>
+          <Property Name="id_zayavka" Type="Int64" Nullable="false" />
+          <Property Name="id_usluga" Type="Int64" Nullable="false" />
+          <Property Name="id_status" Type="Int64" Nullable="false" />
+          <Property Name="id_rabotadateley" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="rabotadatel" Relationship="Self.zayavki_rabotadateley_id_rabotadateley_fkey" FromRole="zayavki_rabotadateley" ToRole="rabotadatel" />
+          <NavigationProperty Name="status" Relationship="Self.zayavki_rabotadateley_id_status_fkey" FromRole="zayavki_rabotadateley" ToRole="status" />
+          <NavigationProperty Name="Uslugi" Relationship="Self.zayavki_rabotadateley_id_usluga_fkey" FromRole="zayavki_rabotadateley" ToRole="Uslugi" />
+        </EntityType>
+        <Association Name="soiskateli_id_authorization_fkey">
+          <End Role="authorization" Type="Self.authorization" Multiplicity="1" />
+          <End Role="soiskateli" Type="Self.soiskateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="authorization">
+              <PropertyRef Name="id_authorization" />
+            </Principal>
+            <Dependent Role="soiskateli">
+              <PropertyRef Name="id_authorization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sotrudniki_id_authorization_fkey">
+          <End Role="authorization" Type="Self.authorization" Multiplicity="1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="authorization">
+              <PropertyRef Name="id_authorization" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="id_authorization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Dogovori_id_rabotadatel_fkey">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="Dogovori" Type="Self.Dogovori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="Dogovori">
+              <PropertyRef Name="id_rabotadatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Dogovori_id_Uslugi_fkey">
+          <End Role="Uslugi" Type="Self.Uslugi" Multiplicity="1" />
+          <End Role="Dogovori" Type="Self.Dogovori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uslugi">
+              <PropertyRef Name="id_uslugi" />
+            </Principal>
+            <Dependent Role="Dogovori">
+              <PropertyRef Name="id_Uslugi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sotrudniki_id_dolzhnost_fkey">
+          <End Role="Dolzhnost" Type="Self.Dolzhnost" Multiplicity="1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolzhnost">
+              <PropertyRef Name="id_Dolzhnoest" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="id_dolzhnost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sobesedovanie_id_itog_fkey">
+          <End Role="itog_sobesedovanie" Type="Self.itog_sobesedovanie" Multiplicity="1" />
+          <End Role="Sobesedovanie" Type="Self.Sobesedovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="itog_sobesedovanie">
+              <PropertyRef Name="id_itog" />
+            </Principal>
+            <Dependent Role="Sobesedovanie">
+              <PropertyRef Name="id_itog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Otklki_Soskateley_id_soiskatel_fkey">
+          <End Role="soiskateli" Type="Self.soiskateli" Multiplicity="1" />
+          <End Role="Otklki_Soskateley" Type="Self.Otklki_Soskateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soiskateli">
+              <PropertyRef Name="id_soiskatel" />
+            </Principal>
+            <Dependent Role="Otklki_Soskateley">
+              <PropertyRef Name="id_soiskatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Otklki_Soskateley_id_status_fkey">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="Otklki_Soskateley" Type="Self.Otklki_Soskateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Otklki_Soskateley">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Otklki_Soskateley_id_vakansi_fkey">
+          <End Role="Vakansi" Type="Self.Vakansi" Multiplicity="1" />
+          <End Role="Otklki_Soskateley" Type="Self.Otklki_Soskateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vakansi">
+              <PropertyRef Name="id_vakansiy" />
+            </Principal>
+            <Dependent Role="Otklki_Soskateley">
+              <PropertyRef Name="id_vakansi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Predlozhenie_o_rabote_id_otklik_fkey">
+          <End Role="Otklki_Soskateley" Type="Self.Otklki_Soskateley" Multiplicity="1" />
+          <End Role="Predlozhenie_o_rabote" Type="Self.Predlozhenie_o_rabote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otklki_Soskateley">
+              <PropertyRef Name="id_otklil" />
+            </Principal>
+            <Dependent Role="Predlozhenie_o_rabote">
+              <PropertyRef Name="id_otklik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sobesedovanie_id_otklik_fkey">
+          <End Role="Otklki_Soskateley" Type="Self.Otklki_Soskateley" Multiplicity="1" />
+          <End Role="Sobesedovanie" Type="Self.Sobesedovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otklki_Soskateley">
+              <PropertyRef Name="id_otklil" />
+            </Principal>
+            <Dependent Role="Sobesedovanie">
+              <PropertyRef Name="id_otklik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Predlozhenie_o_rabote_id_rabotadatel_fkey">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="Predlozhenie_o_rabote" Type="Self.Predlozhenie_o_rabote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="Predlozhenie_o_rabote">
+              <PropertyRef Name="id_rabotadatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Predlozhenie_o_rabote_id_rabotadatel_fkey1">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="Predlozhenie_o_rabote" Type="Self.Predlozhenie_o_rabote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="Predlozhenie_o_rabote">
+              <PropertyRef Name="id_rabotadatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Predlozhenie_o_rabote_id_status_fkey">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="Predlozhenie_o_rabote" Type="Self.Predlozhenie_o_rabote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Predlozhenie_o_rabote">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rabotadatel_id_rabotadatel_fkey">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="rabotadatel1" Type="Self.rabotadatel" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="rabotadatel1">
+              <PropertyRef Name="id_rabotadatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Vakansi_id_rabotadatel_fkey">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="Vakansi" Type="Self.Vakansi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="Vakansi">
+              <PropertyRef Name="id_rabotadatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="zayavki_rabotadateley_id_rabotadateley_fkey">
+          <End Role="rabotadatel" Type="Self.rabotadatel" Multiplicity="1" />
+          <End Role="zayavki_rabotadateley" Type="Self.zayavki_rabotadateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rabotadatel">
+              <PropertyRef Name="id_rabotadatel" />
+            </Principal>
+            <Dependent Role="zayavki_rabotadateley">
+              <PropertyRef Name="id_rabotadateley" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sobesedovanie_id_status_fkey">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="Sobesedovanie" Type="Self.Sobesedovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Sobesedovanie">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Vakansi_id_status_fkey">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="Vakansi" Type="Self.Vakansi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Vakansi">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="zayavki_rabotadateley_id_status_fkey">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="zayavki_rabotadateley" Type="Self.zayavki_rabotadateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="zayavki_rabotadateley">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="zayavki_rabotadateley_id_usluga_fkey">
+          <End Role="Uslugi" Type="Self.Uslugi" Multiplicity="1" />
+          <End Role="zayavki_rabotadateley" Type="Self.zayavki_rabotadateley" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uslugi">
+              <PropertyRef Name="id_uslugi" />
+            </Principal>
+            <Dependent Role="zayavki_rabotadateley">
+              <PropertyRef Name="id_usluga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bazaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="authorization" EntityType="Self.authorization" />
+          <EntitySet Name="Dogovori" EntityType="Self.Dogovori" />
+          <EntitySet Name="Dolzhnost" EntityType="Self.Dolzhnost" />
+          <EntitySet Name="itog_sobesedovanie" EntityType="Self.itog_sobesedovanie" />
+          <EntitySet Name="Otklki_Soskateley" EntityType="Self.Otklki_Soskateley" />
+          <EntitySet Name="Predlozhenie_o_rabote" EntityType="Self.Predlozhenie_o_rabote" />
+          <EntitySet Name="rabotadatel" EntityType="Self.rabotadatel" />
+          <EntitySet Name="Sobesedovanie" EntityType="Self.Sobesedovanie" />
+          <EntitySet Name="soiskateli" EntityType="Self.soiskateli" />
+          <EntitySet Name="Sotrudniki" EntityType="Self.Sotrudniki" />
+          <EntitySet Name="status" EntityType="Self.status" />
+          <EntitySet Name="Uslugi" EntityType="Self.Uslugi" />
+          <EntitySet Name="Vakansi" EntityType="Self.Vakansi" />
+          <EntitySet Name="zayavki_rabotadateley" EntityType="Self.zayavki_rabotadateley" />
+          <AssociationSet Name="soiskateli_id_authorization_fkey" Association="Self.soiskateli_id_authorization_fkey">
+            <End Role="authorization" EntitySet="authorization" />
+            <End Role="soiskateli" EntitySet="soiskateli" />
+          </AssociationSet>
+          <AssociationSet Name="Sotrudniki_id_authorization_fkey" Association="Self.Sotrudniki_id_authorization_fkey">
+            <End Role="authorization" EntitySet="authorization" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
+          <AssociationSet Name="Dogovori_id_rabotadatel_fkey" Association="Self.Dogovori_id_rabotadatel_fkey">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="Dogovori" EntitySet="Dogovori" />
+          </AssociationSet>
+          <AssociationSet Name="Dogovori_id_Uslugi_fkey" Association="Self.Dogovori_id_Uslugi_fkey">
+            <End Role="Uslugi" EntitySet="Uslugi" />
+            <End Role="Dogovori" EntitySet="Dogovori" />
+          </AssociationSet>
+          <AssociationSet Name="Sotrudniki_id_dolzhnost_fkey" Association="Self.Sotrudniki_id_dolzhnost_fkey">
+            <End Role="Dolzhnost" EntitySet="Dolzhnost" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
+          <AssociationSet Name="Sobesedovanie_id_itog_fkey" Association="Self.Sobesedovanie_id_itog_fkey">
+            <End Role="itog_sobesedovanie" EntitySet="itog_sobesedovanie" />
+            <End Role="Sobesedovanie" EntitySet="Sobesedovanie" />
+          </AssociationSet>
+          <AssociationSet Name="Otklki_Soskateley_id_soiskatel_fkey" Association="Self.Otklki_Soskateley_id_soiskatel_fkey">
+            <End Role="soiskateli" EntitySet="soiskateli" />
+            <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
+          </AssociationSet>
+          <AssociationSet Name="Otklki_Soskateley_id_status_fkey" Association="Self.Otklki_Soskateley_id_status_fkey">
+            <End Role="status" EntitySet="status" />
+            <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
+          </AssociationSet>
+          <AssociationSet Name="Otklki_Soskateley_id_vakansi_fkey" Association="Self.Otklki_Soskateley_id_vakansi_fkey">
+            <End Role="Vakansi" EntitySet="Vakansi" />
+            <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
+          </AssociationSet>
+          <AssociationSet Name="Predlozhenie_o_rabote_id_otklik_fkey" Association="Self.Predlozhenie_o_rabote_id_otklik_fkey">
+            <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
+            <End Role="Predlozhenie_o_rabote" EntitySet="Predlozhenie_o_rabote" />
+          </AssociationSet>
+          <AssociationSet Name="Sobesedovanie_id_otklik_fkey" Association="Self.Sobesedovanie_id_otklik_fkey">
+            <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
+            <End Role="Sobesedovanie" EntitySet="Sobesedovanie" />
+          </AssociationSet>
+          <AssociationSet Name="Predlozhenie_o_rabote_id_rabotadatel_fkey" Association="Self.Predlozhenie_o_rabote_id_rabotadatel_fkey">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="Predlozhenie_o_rabote" EntitySet="Predlozhenie_o_rabote" />
+          </AssociationSet>
+          <AssociationSet Name="Predlozhenie_o_rabote_id_rabotadatel_fkey1" Association="Self.Predlozhenie_o_rabote_id_rabotadatel_fkey1">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="Predlozhenie_o_rabote" EntitySet="Predlozhenie_o_rabote" />
+          </AssociationSet>
+          <AssociationSet Name="Predlozhenie_o_rabote_id_status_fkey" Association="Self.Predlozhenie_o_rabote_id_status_fkey">
+            <End Role="status" EntitySet="status" />
+            <End Role="Predlozhenie_o_rabote" EntitySet="Predlozhenie_o_rabote" />
+          </AssociationSet>
+          <AssociationSet Name="rabotadatel_id_rabotadatel_fkey" Association="Self.rabotadatel_id_rabotadatel_fkey">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="rabotadatel1" EntitySet="rabotadatel" />
+          </AssociationSet>
+          <AssociationSet Name="Vakansi_id_rabotadatel_fkey" Association="Self.Vakansi_id_rabotadatel_fkey">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="Vakansi" EntitySet="Vakansi" />
+          </AssociationSet>
+          <AssociationSet Name="zayavki_rabotadateley_id_rabotadateley_fkey" Association="Self.zayavki_rabotadateley_id_rabotadateley_fkey">
+            <End Role="rabotadatel" EntitySet="rabotadatel" />
+            <End Role="zayavki_rabotadateley" EntitySet="zayavki_rabotadateley" />
+          </AssociationSet>
+          <AssociationSet Name="Sobesedovanie_id_status_fkey" Association="Self.Sobesedovanie_id_status_fkey">
+            <End Role="status" EntitySet="status" />
+            <End Role="Sobesedovanie" EntitySet="Sobesedovanie" />
+          </AssociationSet>
+          <AssociationSet Name="Vakansi_id_status_fkey" Association="Self.Vakansi_id_status_fkey">
+            <End Role="status" EntitySet="status" />
+            <End Role="Vakansi" EntitySet="Vakansi" />
+          </AssociationSet>
+          <AssociationSet Name="zayavki_rabotadateley_id_status_fkey" Association="Self.zayavki_rabotadateley_id_status_fkey">
+            <End Role="status" EntitySet="status" />
+            <End Role="zayavki_rabotadateley" EntitySet="zayavki_rabotadateley" />
+          </AssociationSet>
+          <AssociationSet Name="zayavki_rabotadateley_id_usluga_fkey" Association="Self.zayavki_rabotadateley_id_usluga_fkey">
+            <End Role="Uslugi" EntitySet="Uslugi" />
+            <End Role="zayavki_rabotadateley" EntitySet="zayavki_rabotadateley" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище bazaModelContainer" CdmEntityContainer="bazaEntities">
+          <EntitySetMapping Name="authorization">
+            <EntityTypeMapping TypeName="bazaModel.authorization">
+              <MappingFragment StoreEntitySet="authorization">
+                <ScalarProperty Name="id_authorization" ColumnName="id_authorization" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dogovori">
+            <EntityTypeMapping TypeName="bazaModel.Dogovori">
+              <MappingFragment StoreEntitySet="Dogovori">
+                <ScalarProperty Name="id_Dogovor" ColumnName="id_Dogovor" />
+                <ScalarProperty Name="id_rabotadatel" ColumnName="id_rabotadatel" />
+                <ScalarProperty Name="id_Uslugi" ColumnName="id_Uslugi" />
+                <ScalarProperty Name="data_zakluchenite" ColumnName="data_zakluchenite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dolzhnost">
+            <EntityTypeMapping TypeName="bazaModel.Dolzhnost">
+              <MappingFragment StoreEntitySet="Dolzhnost">
+                <ScalarProperty Name="id_Dolzhnoest" ColumnName="id_Dolzhnoest" />
+                <ScalarProperty Name="Dolzhnoest_namimenovanie" ColumnName="Dolzhnoest_namimenovanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itog_sobesedovanie">
+            <EntityTypeMapping TypeName="bazaModel.itog_sobesedovanie">
+              <MappingFragment StoreEntitySet="itog_sobesedovanie">
+                <ScalarProperty Name="id_itog" ColumnName="id_itog" />
+                <ScalarProperty Name="tip_itog" ColumnName="tip_itog" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Otklki_Soskateley">
+            <EntityTypeMapping TypeName="bazaModel.Otklki_Soskateley">
+              <MappingFragment StoreEntitySet="Otklki_Soskateley">
+                <ScalarProperty Name="id_otklil" ColumnName="id_otklil" />
+                <ScalarProperty Name="id_soiskatel" ColumnName="id_soiskatel" />
+                <ScalarProperty Name="id_vakansi" ColumnName="id_vakansi" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="data_otklik" ColumnName="data_otklik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Predlozhenie_o_rabote">
+            <EntityTypeMapping TypeName="bazaModel.Predlozhenie_o_rabote">
+              <MappingFragment StoreEntitySet="Predlozhenie_o_rabote">
+                <ScalarProperty Name="id_predlozhenite" ColumnName="id_predlozhenite" />
+                <ScalarProperty Name="id_otklik" ColumnName="id_otklik" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="id_rabotadatel" ColumnName="id_rabotadatel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rabotadatel">
+            <EntityTypeMapping TypeName="bazaModel.rabotadatel">
+              <MappingFragment StoreEntitySet="rabotadatel">
+                <ScalarProperty Name="id_rabotadatel" ColumnName="id_rabotadatel" />
+                <ScalarProperty Name="naimenovaine_company" ColumnName="naimenovaine_company" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="kontaknie_danniw" ColumnName="kontaknie_danniw" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Opisanie_kompani" ColumnName="Opisanie_kompani" />
+                <ScalarProperty Name="kontaknote_litso" ColumnName="kontaknote_litso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sobesedovanie">
+            <EntityTypeMapping TypeName="bazaModel.Sobesedovanie">
+              <MappingFragment StoreEntitySet="Sobesedovanie">
+                <ScalarProperty Name="id_sobesedovanie" ColumnName="id_sobesedovanie" />
+                <ScalarProperty Name="id_otklik" ColumnName="id_otklik" />
+                <ScalarProperty Name="data_sobesedovanie" ColumnName="data_sobesedovanie" />
+                <ScalarProperty Name="lokatsiya" ColumnName="lokatsiya" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="id_itog" ColumnName="id_itog" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="soiskateli">
+            <EntityTypeMapping TypeName="bazaModel.soiskateli">
+              <MappingFragment StoreEntitySet="soiskateli">
+                <ScalarProperty Name="id_soiskatel" ColumnName="id_soiskatel" />
+                <ScalarProperty Name="familiya" ColumnName="familiya" />
+                <ScalarProperty Name="Imya" ColumnName="Imya" />
+                <ScalarProperty Name="Othcestvo" ColumnName="Othcestvo" />
+                <ScalarProperty Name="data_rozhdenie" ColumnName="data_rozhdenie" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Obrazavanie" ColumnName="Obrazavanie" />
+                <ScalarProperty Name="opit_Raboti" ColumnName="opit_Raboti" />
+                <ScalarProperty Name="navik" ColumnName="navik" />
+                <ScalarProperty Name="dopolnitelnie_dannie" ColumnName="dopolnitelnie_dannie" />
+                <ScalarProperty Name="id_authorization" ColumnName="id_authorization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sotrudniki">
+            <EntityTypeMapping TypeName="bazaModel.Sotrudniki">
+              <MappingFragment StoreEntitySet="Sotrudniki">
+                <ScalarProperty Name="id_Sotrudnik" ColumnName="id_Sotrudnik" />
+                <ScalarProperty Name="Familiya" ColumnName="Familiya" />
+                <ScalarProperty Name="Imya" ColumnName="Imya" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+                <ScalarProperty Name="kontakti" ColumnName="kontakti" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pasportnie_dannie" ColumnName="pasportnie_dannie" />
+                <ScalarProperty Name="zarplata" ColumnName="zarplata" />
+                <ScalarProperty Name="id_authorization" ColumnName="id_authorization" />
+                <ScalarProperty Name="id_dolzhnost" ColumnName="id_dolzhnost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="bazaModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="status_naimenovanit" ColumnName="status_naimenovanit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uslugi">
+            <EntityTypeMapping TypeName="bazaModel.Uslugi">
+              <MappingFragment StoreEntitySet="Uslugi">
+                <ScalarProperty Name="id_uslugi" ColumnName="id_uslugi" />
+                <ScalarProperty Name="uslugi_name" ColumnName="uslugi_name" />
+                <ScalarProperty Name="tsena" ColumnName="tsena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vakansi">
+            <EntityTypeMapping TypeName="bazaModel.Vakansi">
+              <MappingFragment StoreEntitySet="Vakansi">
+                <ScalarProperty Name="id_vakansiy" ColumnName="id_vakansiy" />
+                <ScalarProperty Name="id_rabotadatel" ColumnName="id_rabotadatel" />
+                <ScalarProperty Name="nazvaie_vakansii" ColumnName="nazvaie_vakansii" />
+                <ScalarProperty Name="Opisanie" ColumnName="Opisanie" />
+                <ScalarProperty Name="trebovanie" ColumnName="trebovanie" />
+                <ScalarProperty Name="open_data" ColumnName="open_data" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="zarplata1" ColumnName="zarplata1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zayavki_rabotadateley">
+            <EntityTypeMapping TypeName="bazaModel.zayavki_rabotadateley">
+              <MappingFragment StoreEntitySet="zayavki_rabotadateley">
+                <ScalarProperty Name="id_zayavka" ColumnName="id_zayavka" />
+                <ScalarProperty Name="id_usluga" ColumnName="id_usluga" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="id_rabotadateley" ColumnName="id_rabotadateley" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
