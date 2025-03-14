@@ -36,7 +36,7 @@ namespace цдовым
                     // Пытаемся выполнить простой запрос к базе данных
                     int count = db.rabotadatel.Count();
 
-
+                    DataGrid datagrid = new DataGrid();
                     datagrid.ItemsSource= db.rabotadatel.ToList();
                     // Если запрос выполнен успешно, выводим сообщение
                     MessageBox.Show($"Подключение к базе данных успешно установлено. Записей в таблице rabotadatel: {count}");
