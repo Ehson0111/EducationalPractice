@@ -1,0 +1,68 @@
+﻿<Page x:Class="цдовым.Pages.strlist"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:цдовым.Pages"
+      Background="White"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="strlist">
+
+    <Grid>
+        <!-- Определяем строки и колонки с использованием звездочки (*) для гибкости -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <!-- Первая строка занимает всё доступное пространство -->
+            <RowDefinition Height="Auto"/>
+            <!-- Вторая строка подстраивается под содержимое -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <!-- Первая колонка занимает всё доступное пространство -->
+            <ColumnDefinition Width="*"/>
+            <!-- Вторая колонка занимает всё доступное пространство -->
+        </Grid.ColumnDefinitions>
+
+        <!-- FlowDocumentReader занимает всю первую строку и обе колонки -->
+        <FlowDocumentReader x:Name="flowDocementReader" Grid.Row="0" Grid.ColumnSpan="2" ViewingMode="Scroll" Margin="10">
+            <FlowDocument>
+                <BlockUIContainer>
+                    <!-- ListView для отображения сотрудников в виде карточек -->
+                    <ListView x:Name="employeesDataGrid" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                              MouseDoubleClick="OnMouseDoubleClick" SelectionChanged="employeesDataGrid_SelectionChanged">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <!-- WrapPanel автоматически переносит элементы на новую строку -->
+                                <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), 
+                                    RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                           IsItemsHost="True" />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <!-- Карточка сотрудника с фиксированной шириной и гибкими отступами -->
+                                <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10" Width="200">
+                                    <StackPanel>
+                                        <Image Source="/Resourced/OIP.jpg" Width="100" Height="100" 
+                                               Stretch="UniformToFill" HorizontalAlignment="Center" Margin="0,0,0,10" />
+                                        <TextBlock Text="{Binding Path=Dolzhnost.Dolzhnoest_namimenovanie}" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Imya}" />
+                                        <TextBlock Text="{Binding Familiya}" />
+                                        <TextBlock Text="{Binding Otchestvo}" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </BlockUIContainer>
+            </FlowDocument>
+        </FlowDocumentReader>
+
+        <!-- Кнопки внизу страницы -->
+        <!-- Кнопки внизу страницы -->
+        <Button x:Name="PrintListButton" Content="Печать списка" Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Right" Width="150" Background="#FF4EC360"  Click="PrintListButton_Click" />
+        <Button x:Name="adduser" Content="Добавить" Grid.Row="1" Grid.Column="0" Margin="10" HorizontalAlignment="Left" Click="adduser_Click"  Background="#FF4EC360"  Height="40" Width="150"/>
+    </Grid>
+</Page>

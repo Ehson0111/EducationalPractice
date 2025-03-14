@@ -25,5 +25,15 @@ namespace цдовым.Pages
         {
             InitializeComponent();
         }
+
+        private void strlist_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new strlist());
+        }
+
+        private void kndlist_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

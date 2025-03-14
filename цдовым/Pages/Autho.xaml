@@ -29,8 +29,8 @@
             <TextBox x:Name="tbcode" Visibility="Hidden" />
 
             <StackPanel Orientation="Horizontal" Height="80" HorizontalAlignment="Center">
-                <Button x:Name="btnEnterGuest" Margin="5,15,5,5" Content="Войти как гость" Click="btnEnterGuest_Click" Cursor="Hand" Height="38"/>
-                <Button x:Name="btnEnter" Margin="5,15,5,5" Content="Войти" Click="btnEnter_Click" Width="73" Height="36"/>
+                <Button x:Name="btnEnterGuest" Margin="5,15,5,5" Content="Войти как гость" Click="btnEnterGuest_Click" Cursor="Hand" Height="38"  Background="#FFBDBBC6" BorderBrush="#FF330909" />
+                <Button x:Name="btnEnter" Margin="5,15,5,5" Content="Войти" Click="btnEnter_Click" Width="73" Height="36" Background="#FFBDBBC6" BorderBrush="#FF330909" />
 
 
 

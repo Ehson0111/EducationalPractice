@@ -2,14 +2,33 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      Background="White"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:цдовым.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Sotrudnik">
+      Title="Sotrudnik" ShowsNavigationUI="True">
+    <Page.Background>
+        <ImageBrush ImageSource="/Resourced/phon.png" TileMode="None" Stretch="Fill"/>
+    </Page.Background>
 
     <Grid>
-        
+        <!-- Определяем строки для кнопок -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <!-- Пространство сверху -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопка 1 -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопка 2 -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопка 3 -->
+            <RowDefinition Height="*"/>
+            <!-- Пространство снизу -->
+        </Grid.RowDefinitions>
+
+        <!-- Кнопки размещены в одной колонке с отступами 10 dp -->
+        <Button x:Name="strlist" Content="Список сотрудников" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Width="342" Height="44" Click="strlist_Click" Background="#FF32B0B9" Foreground="White"/>
+        <Button x:Name="kndlist" Content="Список клиентов" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" Width="342" Height="45" Background="#FF32B0B9" Foreground="White" Click="kndlist_Click"/>
+        <Button x:Name="vklist" Content="Список вакансии" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" Width="342" Height="45" Background="#FF32B0B9" Foreground="White"/>
     </Grid>
 </Page>
