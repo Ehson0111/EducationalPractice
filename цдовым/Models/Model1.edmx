@@ -25,9 +25,9 @@
         </EntityType>
         <EntityType Name="Dolzhnost">
           <Key>
-            <PropertyRef Name="id_Dolzhnoest" />
+            <PropertyRef Name="id_dolzhnost" />
           </Key>
-          <Property Name="id_Dolzhnoest" Type="int8" Nullable="false" />
+          <Property Name="id_dolzhnost" Type="int8" Nullable="false" />
           <Property Name="Dolzhnoest_namimenovanie" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="itog_sobesedovanie">
@@ -46,6 +46,13 @@
           <Property Name="id_vakansi" Type="int8" Nullable="false" />
           <Property Name="id_status" Type="int8" Nullable="false" />
           <Property Name="data_otklik" Type="timestamp" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pol">
+          <Key>
+            <PropertyRef Name="id_pol" />
+          </Key>
+          <Property Name="id_pol" Type="int8" Nullable="false" />
+          <Property Name="pol" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Predlozhenie_o_rabote">
           <Key>
@@ -115,9 +122,11 @@
           <Property Name="kontakti" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="pasportnie_dannie" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="zarplata" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="zarplata" Type="int4" Nullable="false" />
           <Property Name="id_authorization" Type="int8" Nullable="false" />
           <Property Name="id_dolzhnost" Type="int8" Nullable="false" />
+          <Property Name="id_pol" Type="int8" Nullable="false" />
+          <Property Name="data_rozhdenie" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="status">
           <Key>
@@ -353,10 +362,22 @@
           <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dolzhnost">
-              <PropertyRef Name="id_Dolzhnoest" />
+              <PropertyRef Name="id_dolzhnost" />
             </Principal>
             <Dependent Role="Sotrudniki">
               <PropertyRef Name="id_dolzhnost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sotrudniki_id_pol_fkey">
+          <End Role="pol" Type="Self.pol" Multiplicity="1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pol">
+              <PropertyRef Name="id_pol" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="id_pol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -426,6 +447,7 @@
           <EntitySet Name="Dolzhnost" EntityType="Self.Dolzhnost" Schema="public" store:Type="Tables" />
           <EntitySet Name="itog_sobesedovanie" EntityType="Self.itog_sobesedovanie" Schema="public" store:Type="Tables" />
           <EntitySet Name="Otklki_Soskateley" EntityType="Self.Otklki_Soskateley" Schema="public" store:Type="Tables" />
+          <EntitySet Name="pol" EntityType="Self.pol" Schema="public" store:Type="Tables" />
           <EntitySet Name="Predlozhenie_o_rabote" EntityType="Self.Predlozhenie_o_rabote" Schema="public" store:Type="Tables" />
           <EntitySet Name="rabotadatel" EntityType="Self.rabotadatel" Schema="public" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="public" store:Type="Tables" />
@@ -504,6 +526,10 @@
             <End Role="Dolzhnost" EntitySet="Dolzhnost" />
             <End Role="Sotrudniki" EntitySet="Sotrudniki" />
           </AssociationSet>
+          <AssociationSet Name="Sotrudniki_id_pol_fkey" Association="Self.Sotrudniki_id_pol_fkey">
+            <End Role="pol" EntitySet="pol" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
+          </AssociationSet>
           <AssociationSet Name="Vakansi_id_rabotadatel_fkey" Association="Self.Vakansi_id_rabotadatel_fkey">
             <End Role="rabotadatel" EntitySet="rabotadatel" />
             <End Role="Vakansi" EntitySet="Vakansi" />
@@ -555,9 +581,9 @@
         </EntityType>
         <EntityType Name="Dolzhnost">
           <Key>
-            <PropertyRef Name="id_Dolzhnoest" />
+            <PropertyRef Name="id_dolzhnost" />
           </Key>
-          <Property Name="id_Dolzhnoest" Type="Int64" Nullable="false" />
+          <Property Name="id_dolzhnost" Type="Int64" Nullable="false" />
           <Property Name="Dolzhnoest_namimenovanie" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Sotrudniki" Relationship="Self.Sotrudniki_id_dolzhnost_fkey" FromRole="Dolzhnost" ToRole="Sotrudniki" />
         </EntityType>
@@ -583,6 +609,14 @@
           <NavigationProperty Name="Vakansi" Relationship="Self.Otklki_Soskateley_id_vakansi_fkey" FromRole="Otklki_Soskateley" ToRole="Vakansi" />
           <NavigationProperty Name="Predlozhenie_o_rabote" Relationship="Self.Predlozhenie_o_rabote_id_otklik_fkey" FromRole="Otklki_Soskateley" ToRole="Predlozhenie_o_rabote" />
           <NavigationProperty Name="Sobesedovanie" Relationship="Self.Sobesedovanie_id_otklik_fkey" FromRole="Otklki_Soskateley" ToRole="Sobesedovanie" />
+        </EntityType>
+        <EntityType Name="pol">
+          <Key>
+            <PropertyRef Name="id_pol" />
+          </Key>
+          <Property Name="id_pol" Type="Int64" Nullable="false" />
+          <Property Name="pol1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sotrudniki" Relationship="Self.Sotrudniki_id_pol_fkey" FromRole="pol" ToRole="Sotrudniki" />
         </EntityType>
         <EntityType Name="Predlozhenie_o_rabote">
           <Key>
@@ -669,11 +703,14 @@
           <Property Name="kontakti" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pasportnie_dannie" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="zarplata" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="zarplata" Type="Int32" Nullable="false" />
           <Property Name="id_authorization" Type="Int64" Nullable="false" />
           <Property Name="id_dolzhnost" Type="Int64" Nullable="false" />
+          <Property Name="id_pol" Type="Int64" Nullable="false" />
+          <Property Name="data_rozhdenie" Type="DateTime" Precision="0" Nullable="false" />
           <NavigationProperty Name="authorization" Relationship="Self.Sotrudniki_id_authorization_fkey" FromRole="Sotrudniki" ToRole="authorization" />
           <NavigationProperty Name="Dolzhnost" Relationship="Self.Sotrudniki_id_dolzhnost_fkey" FromRole="Sotrudniki" ToRole="Dolzhnost" />
+          <NavigationProperty Name="pol" Relationship="Self.Sotrudniki_id_pol_fkey" FromRole="Sotrudniki" ToRole="pol" />
         </EntityType>
         <EntityType Name="status">
           <Key>
@@ -790,7 +827,7 @@
           <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Dolzhnost">
-              <PropertyRef Name="id_Dolzhnoest" />
+              <PropertyRef Name="id_dolzhnost" />
             </Principal>
             <Dependent Role="Sotrudniki">
               <PropertyRef Name="id_dolzhnost" />
@@ -866,6 +903,18 @@
             </Principal>
             <Dependent Role="Sobesedovanie">
               <PropertyRef Name="id_otklik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sotrudniki_id_pol_fkey">
+          <End Role="pol" Type="Self.pol" Multiplicity="1" />
+          <End Role="Sotrudniki" Type="Self.Sotrudniki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pol">
+              <PropertyRef Name="id_pol" />
+            </Principal>
+            <Dependent Role="Sotrudniki">
+              <PropertyRef Name="id_pol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -995,6 +1044,7 @@
           <EntitySet Name="Dolzhnost" EntityType="Self.Dolzhnost" />
           <EntitySet Name="itog_sobesedovanie" EntityType="Self.itog_sobesedovanie" />
           <EntitySet Name="Otklki_Soskateley" EntityType="Self.Otklki_Soskateley" />
+          <EntitySet Name="pol" EntityType="Self.pol" />
           <EntitySet Name="Predlozhenie_o_rabote" EntityType="Self.Predlozhenie_o_rabote" />
           <EntitySet Name="rabotadatel" EntityType="Self.rabotadatel" />
           <EntitySet Name="role" EntityType="Self.role" />
@@ -1052,6 +1102,10 @@
           <AssociationSet Name="Sobesedovanie_id_otklik_fkey" Association="Self.Sobesedovanie_id_otklik_fkey">
             <End Role="Otklki_Soskateley" EntitySet="Otklki_Soskateley" />
             <End Role="Sobesedovanie" EntitySet="Sobesedovanie" />
+          </AssociationSet>
+          <AssociationSet Name="Sotrudniki_id_pol_fkey" Association="Self.Sotrudniki_id_pol_fkey">
+            <End Role="pol" EntitySet="pol" />
+            <End Role="Sotrudniki" EntitySet="Sotrudniki" />
           </AssociationSet>
           <AssociationSet Name="Predlozhenie_o_rabote_id_rabotadatel_fkey" Association="Self.Predlozhenie_o_rabote_id_rabotadatel_fkey">
             <End Role="rabotadatel" EntitySet="rabotadatel" />
@@ -1123,7 +1177,7 @@
           <EntitySetMapping Name="Dolzhnost">
             <EntityTypeMapping TypeName="bazaModel.Dolzhnost">
               <MappingFragment StoreEntitySet="Dolzhnost">
-                <ScalarProperty Name="id_Dolzhnoest" ColumnName="id_Dolzhnoest" />
+                <ScalarProperty Name="id_dolzhnost" ColumnName="id_dolzhnost" />
                 <ScalarProperty Name="Dolzhnoest_namimenovanie" ColumnName="Dolzhnoest_namimenovanie" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1144,6 +1198,14 @@
                 <ScalarProperty Name="id_vakansi" ColumnName="id_vakansi" />
                 <ScalarProperty Name="id_status" ColumnName="id_status" />
                 <ScalarProperty Name="data_otklik" ColumnName="data_otklik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pol">
+            <EntityTypeMapping TypeName="bazaModel.pol">
+              <MappingFragment StoreEntitySet="pol">
+                <ScalarProperty Name="id_pol" ColumnName="id_pol" />
+                <ScalarProperty Name="pol1" ColumnName="pol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1222,6 +1284,8 @@
                 <ScalarProperty Name="zarplata" ColumnName="zarplata" />
                 <ScalarProperty Name="id_authorization" ColumnName="id_authorization" />
                 <ScalarProperty Name="id_dolzhnost" ColumnName="id_dolzhnost" />
+                <ScalarProperty Name="id_pol" ColumnName="id_pol" />
+                <ScalarProperty Name="data_rozhdenie" ColumnName="data_rozhdenie" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

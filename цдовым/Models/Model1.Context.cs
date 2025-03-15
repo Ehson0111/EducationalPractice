@@ -30,6 +30,7 @@ namespace цдовым.Models
         public virtual DbSet<Dolzhnost> Dolzhnost { get; set; }
         public virtual DbSet<itog_sobesedovanie> itog_sobesedovanie { get; set; }
         public virtual DbSet<Otklki_Soskateley> Otklki_Soskateley { get; set; }
+        public virtual DbSet<pol> pol { get; set; }
         public virtual DbSet<Predlozhenie_o_rabote> Predlozhenie_o_rabote { get; set; }
         public virtual DbSet<rabotadatel> rabotadatel { get; set; }
         public virtual DbSet<role> role { get; set; }

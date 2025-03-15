@@ -16,15 +16,26 @@ namespace WpfApp1
         /// Метод для получения контекста данных, необходимого для подключения к базе данных.
         /// </summary>
         /// <returns>Контекст данных типа demonEntities.</returns>
-        public static bazaEntities GetContext()
-        {
-            // Проверка, установлено ли подключение; если нет, создается новое подключение
-            if (_context == null)
+        //public static bazaEntities GetContext()
+        //{
+        //    // Проверка, установлено ли подключение; если нет, создается новое подключение
+        //    if (_context == null)
+        //    {
+        //        _context = new bazaEntities(); // Создание нового подключения к БД
+        //    }
+        //    return _context; // Возвращение текущего подключения
+        //}
+       //private static bazaEntities _context;
+
+            public static bazaEntities GetContext()
             {
-                _context = new bazaEntities(); // Создание нового подключения к БД
+                if (_context == null)
+                {
+                    _context = new bazaEntities();
+                }
+                return _context;
             }
-            return _context; // Возвращение текущего подключения
-        }
+        
 
         /// <summary>
         /// Метод для добавления новой записи о пользователе в таблицу Users базы данных.
@@ -114,6 +125,19 @@ namespace WpfApp1
                 _context = GetContext();
             }
             var lastAuth = _context.authorization.OrderByDescending(a => a.id_authorization).FirstOrDefault();
+            if (lastAuth != null)
+            {
+                return Convert.ToInt32(lastAuth.id_authorization);
+            }
+            throw new InvalidOperationException("Таблица Авторизация пуста.");
+        }
+        public int GetLastEmloyesId()
+        {
+            if (_context == null)
+            {
+                _context = GetContext();
+            }
+            var lastAuth = _context.Sotrudniki.OrderByDescending(a => a.id_Sotrudnik).FirstOrDefault();
             if (lastAuth != null)
             {
                 return Convert.ToInt32(lastAuth.id_authorization);

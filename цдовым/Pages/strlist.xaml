@@ -7,9 +7,9 @@
       Background="White"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="strlist">
+      Title="strlist" IsVisibleChanged="Page_IsVisibleChanged"  >
 
-    <Grid>
+    <Grid  >
         <!-- Определяем строки и колонки с использованием звездочки (*) для гибкости -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -25,12 +25,12 @@
         </Grid.ColumnDefinitions>
 
         <!-- FlowDocumentReader занимает всю первую строку и обе колонки -->
-        <FlowDocumentReader x:Name="flowDocementReader" Grid.Row="0" Grid.ColumnSpan="2" ViewingMode="Scroll" Margin="10">
+        <FlowDocumentReader x:Name="flowDocementReader" Grid.Row="0" Grid.ColumnSpan="2" ViewingMode="Scroll" Margin="10" IsVisibleChanged="flowDocementReader_IsVisibleChanged_2">
             <FlowDocument>
                 <BlockUIContainer>
                     <!-- ListView для отображения сотрудников в виде карточек -->
                     <ListView x:Name="employeesDataGrid" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                              MouseDoubleClick="OnMouseDoubleClick" SelectionChanged="employeesDataGrid_SelectionChanged">
+                              MouseDoubleClick="OnMouseDoubleClick" >
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <!-- WrapPanel автоматически переносит элементы на новую строку -->

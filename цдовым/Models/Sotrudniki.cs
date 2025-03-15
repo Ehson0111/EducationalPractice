@@ -21,11 +21,14 @@ namespace цдовым.Models
         public string kontakti { get; set; }
         public string email { get; set; }
         public string pasportnie_dannie { get; set; }
-        public decimal zarplata { get; set; }
+        public int zarplata { get; set; }
         public long id_authorization { get; set; }
         public long id_dolzhnost { get; set; }
+        public long id_pol { get; set; }
+        public System.DateTime data_rozhdenie { get; set; }
     
         public virtual authorization authorization { get; set; }
         public virtual Dolzhnost Dolzhnost { get; set; }
+        public virtual pol pol { get; set; }
     }
 }

@@ -12,16 +12,16 @@ namespace цдовым.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Dolzhnost
+    public partial class pol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Dolzhnost()
+        public pol()
         {
             this.Sotrudniki = new HashSet<Sotrudniki>();
         }
     
-        public long id_dolzhnost { get; set; }
-        public string Dolzhnoest_namimenovanie { get; set; }
+        public long id_pol { get; set; }
+        public string pol1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sotrudniki> Sotrudniki { get; set; }

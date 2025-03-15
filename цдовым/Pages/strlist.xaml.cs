@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1;
 using цдовым.Models;
 
 namespace цдовым.Pages
@@ -30,35 +31,29 @@ namespace цдовым.Pages
         }
         private void LoadData() {
 
-            //var employees = db.Sotrudniki.Select(c => new
-            //{
-            //    c.id_Sotrudnik,
-            //    c.Imya,
-            //    c.Familiya,
-            //    c.Otchestvo,
-            //    c.kontakti,
-            //    //nazvanie = c.Dolzhnost .Dolzhnoest_namimenovanie
-            //    c.Dolzhnost.Dolzhnoest_namimenovanie
-            //}).ToList();
-            employeesDataGrid.ItemsSource = db.Sotrudniki.ToList(); // Привязка данных к ListView
+
+            //employeesDataGrid.ItemsSource = db.Sotrudniki.ToList(); // Привязка данных к ListView
+            employeesDataGrid.ItemsSource = Helpel.GetContext().Sotrudniki.ToList();
+
         }
 
         private void adduser_Click(object sender, RoutedEventArgs e)
         {
 
 
-            //NavigationService.Navigate(new EditEmployeeForm());
+            //добавление сотрудника 
             NavigationService.Navigate(new EditEmloyeeForm());
         }
         private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // Обработчик двойного клика по сотруднику
+            // Обработчик двойного клика по сотруднику изминение данных
             if (employeesDataGrid.SelectedItem != null)
             {
                 var selectedEmployee = employeesDataGrid.SelectedItem as dynamic;
                 if (selectedEmployee != null)
                 {
-                    int employeeId = selectedEmployee.Id_Сотрудник; // Получение ID сотрудника
+
+                    int employeeId = Convert.ToInt32( selectedEmployee.id_Sotrudnik); // Получение ID сотрудника
                     NavigationService.Navigate(new EditEmloyeeForm(employeeId)); // Переход на страницу редактирования
                 }
             }
@@ -82,19 +77,23 @@ namespace цдовым.Pages
             }
         }
 
-        private void flowDocementReader_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Helpel.GetContext().ChangeTracker.Entries().ToList().ForEach(entry => entry.Reload());
+
+                LoadData();
+
+            }
+        }
+
+        private void flowDocementReader_IsVisibleChanged_2(object sender, DependencyPropertyChangedEventArgs e)
         {
 
         }
-
-        private void employeesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void flowDocementReader_IsVisibleChanged_1(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
+         
+         
     }
 }
