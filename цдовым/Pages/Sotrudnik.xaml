@@ -28,7 +28,7 @@
 
         <!-- Кнопки размещены в одной колонке с отступами 10 dp -->
         <Button x:Name="strlist" Content="Список сотрудников" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Width="342" Height="44" Click="strlist_Click" Background="#FF32B0B9" Foreground="White"/>
-        <Button x:Name="kndlist" Content="Список клиентов" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" Width="342" Height="45" Background="#FF32B0B9" Foreground="White" Click="kndlist_Click"/>
-        <Button x:Name="vklist" Content="Список вакансии" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" Width="342" Height="45" Background="#FF32B0B9" Foreground="White"/>
+        <!--<Button x:Name="kndlist" Content="Список клиентов" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" Width="342" Height="45" Background="#FF32B0B9" Foreground="White" Click="kndlist_Click"/>-->
+        <Button x:Name="vklist" Content="Список вакансии" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" Width="342" Height="45" Background="#FF32B0B9" Foreground="White" Click="vklist_Click"/>
     </Grid>
 </Page>

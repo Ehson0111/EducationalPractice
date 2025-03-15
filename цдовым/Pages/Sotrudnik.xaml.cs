@@ -31,10 +31,17 @@ namespace цдовым.Pages
             NavigationService.Navigate(new strlist());
         }
 
-        private void kndlist_Click(object sender, RoutedEventArgs e)
+        //private void kndlist_Click(object sender, RoutedEventArgs e)
+        //{
+        //    NavigationService.Navigate(new listclienttov());
+
+        //}
+
+        private void vklist_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new listclienttov());
+            NavigationService.Navigate(new Rabotadatel());
 
         }
+
     }
 }

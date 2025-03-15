@@ -72,7 +72,7 @@ namespace цдовым.Pages
 
             HashPassword hash = new HashPassword();
             //password1 = hash.HashPassword1(password1);
-            //password1 = hash.HashPassword1(password1);
+            password1 = hash.HashPassword1(password1);
 
 
             db = new bazaEntities();
@@ -162,7 +162,7 @@ namespace цдовым.Pages
                     break;
 
                 case "Работадатель":
-                    NavigationService.Navigate(new Rabotadatel(user, _role));
+                    NavigationService.Navigate(new Rabotadatel(user, Convert.ToInt32(user.soiskateli.First().id_soiskatel),_role));
                     break;
             }
             //}
