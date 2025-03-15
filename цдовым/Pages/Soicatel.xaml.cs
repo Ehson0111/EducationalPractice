@@ -23,12 +23,14 @@ namespace цдовым.Pages
     public partial class Soicatel : Page
     {
         private static bazaEntities db;
+        authorization authorization;
         public Soicatel(authorization user, string role)
         {
             InitializeComponent();
             db = new bazaEntities();
+            authorization = user;
 
-      
+
 
             LoadData();
             //text1.Content = user.soiskateli.First();
@@ -40,7 +42,7 @@ namespace цдовым.Pages
         {
             DateTime currentTime = DateTime.Now;
             string greeting;
-            var client= user.soiskateli.First();
+            var client = user.soiskateli.First();
 
             if (currentTime.Hour >= 10 && currentTime.Hour < 12)
             {
@@ -105,7 +107,7 @@ namespace цдовым.Pages
             switch (cmbFilter.SelectedIndex)
             {
                 case 1:
-                    items = items.Where(x => x.zarplata1  < 100000).ToList();
+                    items = items.Where(x => x.zarplata1 < 100000).ToList();
                     break;
                 case 2:
                     items = items.Where(x => x.zarplata1 >= 100000).ToList();
@@ -175,5 +177,48 @@ namespace цдовым.Pages
         {
 
         }
+
+        private void ResponseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is int vacancyId)
+            {
+                // Здесь логика отклика на вакансию
+                MessageBox.Show($"Отклик отправлен на вакансию ID: {vacancyId}");
+
+                // Пример обновления интерфейса:
+                // button.Content = "Отправлено!";
+                // button.IsEnabled = false;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (sender is Button button && button.DataContext is Vakansi vakansi)
+            {
+                // Получаем ID вакансии
+                int vakansiId =Convert.ToInt32( vakansi.id_vakansiy);
+
+                // Получаем ID соискателя (например, из текущей сессии)
+                int soiskatelId = Convert.ToInt32(authorization.soiskateli.First().id_soiskatel); // Реализуйте этот метод
+
+                // Статус "Новый" (предположим, что его ID = 1)
+                int statusId = 1;
+
+                // Сохраняем отклик в базу данных
+                try
+                {
+                    var helper = new Helpel();
+                    helper.CreateOtklik(soiskatelId, vakansiId, statusId);
+                    MessageBox.Show("Отклик успешно сохранен!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при сохранении отклика: {ex.Message}");
+                }
+            }
+        }
+
+
     }
 }

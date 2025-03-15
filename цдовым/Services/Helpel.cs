@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
+
 //using WpfApp1.Models;
 using цдовым.Models;
 
@@ -143,6 +145,44 @@ namespace WpfApp1
                 return Convert.ToInt32(lastAuth.id_authorization);
             }
             throw new InvalidOperationException("Таблица Авторизация пуста.");
+        } 
+        public int GetLastOtklikId()
+        {
+            if (_context == null)
+            {
+                _context = GetContext();
+            }
+            var lastAuth = _context.Otklki_Soskateley.OrderByDescending(a => a.id_otklil).FirstOrDefault();
+            if (lastAuth != null)
+            {
+                return Convert.ToInt32(lastAuth.id_otklil);
+            }
+            throw new InvalidOperationException("Таблица Авторизация пуста.");
+        }
+
+        public void CreateOtklik(int soiskatelId, int vakansiId, int statusId)
+        {
+            // Убедитесь, что контекст инициализирован
+            if (_context == null)
+            {
+                _context = GetContext();
+            }
+
+            // Создаем новый объект отклика
+            var otklik = new Otklki_Soskateley
+            {
+                id_soiskatel = soiskatelId,
+                id_vakansi = vakansiId,
+                id_status = statusId,
+                id_otklil=GetLastOtklikId()+1,
+                data_otklik = DateTime.Now // Текущая дата и время
+            };
+
+            // Добавляем отклик в контекст
+            _context.Otklki_Soskateley.Add(otklik);
+
+            // Сохраняем изменения в базе данных
+            _context.SaveChanges();
         }
 
         /// <summary>
