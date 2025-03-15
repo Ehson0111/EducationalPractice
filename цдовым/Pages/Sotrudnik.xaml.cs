@@ -33,6 +33,7 @@ namespace цдовым.Pages
 
         private void kndlist_Click(object sender, RoutedEventArgs e)
         {
+            NavigationService.Navigate(new listclienttov());
 
         }
     }
