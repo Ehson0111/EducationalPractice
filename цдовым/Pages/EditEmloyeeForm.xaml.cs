@@ -36,8 +36,11 @@ namespace цдовым.Pages
         {
 
 
+
             InitializeComponent();
+            
             _isNewEmployee = true; // Режим добавления
+            deluser.Visibility =Visibility.Hidden;
             //db = new bazaEntities();
             db = Helpel.GetContext(); // Используем общий контекст
                                       // Остальной код
@@ -232,6 +235,16 @@ namespace цдовым.Pages
         }
         private void txtContactData_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+        }
+
+        private void deluser_Click(object sender, RoutedEventArgs e)
+        {
+            //_employeeId
+            Helpel helpel = new Helpel();
+            helpel.RemoveUser(_employeeId);
+            db.SaveChanges();
+            NavigationService.GoBack();
 
         }
 

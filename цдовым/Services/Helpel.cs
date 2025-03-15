@@ -109,8 +109,8 @@ namespace WpfApp1
                 _context = GetContext();
             }
 
-            var users = _context.soiskateli.Find(idUser); // Поиск записи пользователя по его id
-            _context.soiskateli.Remove(users); // Удаление записи найденного пользователя
+            var users = _context.Sotrudniki.Find(idUser); // Поиск записи пользователя по его id
+            _context.Sotrudniki.Remove(users); // Удаление записи найденного пользователя
             _context.SaveChanges(); // Сохранение изменений в БД
         }
         /// <summary>
