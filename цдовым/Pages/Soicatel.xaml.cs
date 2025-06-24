@@ -24,19 +24,22 @@ namespace цдовым.Pages
     {
         private static bazaEntities db;
         authorization authorization;
+        bool guests;
         public Soicatel(authorization user, string role)
         {
             InitializeComponent();
             db = new bazaEntities();
             authorization = user;
-
-
-
             LoadData();
             //text1.Content = user.soiskateli.First();
             time(user);
-
-
+        }
+        public Soicatel()
+        {
+            InitializeComponent(); 
+            guests = true;
+            LoadData();
+            //response
         }
         private void time(authorization user)
         {
@@ -73,7 +76,9 @@ namespace цдовым.Pages
             ApplyFiltersAndSorting(items);
         }
         private void ApplyFiltersAndSorting(List<Vakansi> items)
+
         {
+
             // Поиск
             string searchText = txtSearch.Text.ToLower();
             if (!string.IsNullOrWhiteSpace(searchText))
@@ -182,7 +187,7 @@ namespace цдовым.Pages
         {
             if (sender is Button button && button.Tag is int vacancyId)
             {
-                // Здесь логика отклика на вакансию
+                // Здесь ыя отклика на вакансию
                 MessageBox.Show($"Отклик отправлен на вакансию ID: {vacancyId}");
 
                 // Пример обновления интерфейса:
@@ -194,10 +199,16 @@ namespace цдовым.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            if (sender is Button button && button.DataContext is Vakansi vakansi)
+            if (guests==true)
+            {
+
+                  MessageBox.Show("Нужно зарегистрироваться чтобы отправить отклик");
+
+            }
+           else if (sender is Button button && button.DataContext is Vakansi vakansi)
             {
                 // Получаем ID вакансии
-                int vakansiId =Convert.ToInt32( vakansi.id_vakansiy);
+                int vakansiId = Convert.ToInt32(vakansi.id_vakansiy);
 
                 // Получаем ID соискателя (например, из текущей сессии)
                 int soiskatelId = Convert.ToInt32(authorization.soiskateli.First().id_soiskatel); // Реализуйте этот метод

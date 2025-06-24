@@ -28,8 +28,8 @@ namespace цдовым.Pages
 
     public partial class Autho : Page
     {
-        int click; // Счетчик попыток входа
-        string checkCode; // Код для дву
+        int click; 
+        string checkCode; 
         private static bazaEntities db;
         int n;
         private DispatcherTimer timer; // Таймер для блокировки входа
@@ -72,7 +72,9 @@ namespace цдовым.Pages
 
             HashPassword hash = new HashPassword();
             //password1 = hash.HashPassword1(password1);
-            password1 = hash.HashPassword1(password1);
+
+
+            //password1 = hash.HashPassword1(password1);
 
 
             db = new bazaEntities();
@@ -175,6 +177,8 @@ namespace цдовым.Pages
 
         private void btnEnterGuest_Click(object sender, RoutedEventArgs e)
         {
+            NavigationService.Navigate(new Soicatel());
+
 
         }
     }

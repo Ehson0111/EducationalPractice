@@ -189,10 +189,11 @@
 
                             <!-- Кнопка отклика -->
                             <Button Grid.Column="3" 
+                                    x:Name="response"
+                                    
                                    Content="Откликнуться" 
                                    Margin="2" 
                                    Padding="5"
-                                    x:Name="Response"
                                    Click="Button_Click"
                                    Tag="{Binding id_vakansiy}"
                                    HorizontalAlignment="Center"

@@ -29,7 +29,8 @@ namespace цдовым.Pages
             db = new bazaEntities(); // Инициализация контекста
             LoadData(); // Загрузка данных
         }
-        private void LoadData() {
+        private void LoadData()
+        {
 
 
             //employeesDataGrid.ItemsSource = db.Sotrudniki.ToList(); // Привязка данных к ListView
@@ -53,31 +54,53 @@ namespace цдовым.Pages
                 if (selectedEmployee != null)
                 {
 
-                    int employeeId = Convert.ToInt32( selectedEmployee.id_Sotrudnik); // Получение ID сотрудника
+                    int employeeId = Convert.ToInt32(selectedEmployee.id_Sotrudnik); // Получение ID сотрудника
                     NavigationService.Navigate(new EditEmloyeeForm(employeeId)); // Переход на страницу редактирования
                 }
             }
         }
         private void PrintListButton_Click(object sender, RoutedEventArgs e)
         {
-            FlowDocument doc = flowDocementReader.Document;
-            if (doc == null)
-            {
-                MessageBox.Show("Документ не найден");
-                return;
+            var employees = db.Sotrudniki.ToList();
 
+            if (employees.Count == 0)
+            {
+                MessageBox.Show("Нет сотрудников ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            FlowDocument document = new FlowDocument();
+
+            Paragraph header = new Paragraph(new Run("Список сотрудников"))
+            {
+                FontSize = 24,
+                FontWeight = FontWeights.Bold,
+                TextAlignment = TextAlignment.Center // Выравнивание по центру
+            };
+            document.Blocks.Add(header);
+
+
+            foreach (var employee in employees)
+            {
+                Paragraph employeeParagraph = new Paragraph(new Run($"ФИО:{employee.Familiya} {employee.Imya} {employee.Otchestvo},Дата рождение {employee.data_rozhdenie}, Зарплата {employee.zarplata}₽ "))
+                {
+                    FontSize = 14,
+                    TextAlignment = TextAlignment.Left // Выравнивание по левому краю
+                };
+                document.Blocks.Add(employeeParagraph);
             }
 
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
-
-                IDocumentPaginatorSource idpSource = doc;
-                printDialog.PrintDocument(idpSource.DocumentPaginator, "Список сотрудников");
+                // Печатаем документ
+                IDocumentPaginatorSource idpSource = document;
+                printDialog.PrintDocument(idpSource.DocumentPaginator, "Список недвижиостей");
             }
+
         }
 
-        
+
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible)
@@ -93,7 +116,7 @@ namespace цдовым.Pages
         {
 
         }
-         
-         
+
+
     }
 }

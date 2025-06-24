@@ -213,21 +213,7 @@ namespace цдовым.Pages
                 MessageBox.Show("Изменения сохранены!");
                 NavigationService.GoBack();
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-            {
-                var errorMessages = ex.EntityValidationErrors
-                    .SelectMany(x => x.ValidationErrors)
-                    .Select(x => x.ErrorMessage);
-
-                MessageBox.Show($"Ошибка валидации: {string.Join("; ", errorMessages)}");
-            }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException dbUpdateEx)
-            {
-                var innerException = dbUpdateEx.InnerException?.InnerException;
-                MessageBox.Show(innerException != null
-                    ? $"Ошибка: {innerException.Message}"
-                    : $"Ошибка: {dbUpdateEx.Message}");
-            }
+         
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка: {ex.Message}");
