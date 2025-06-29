@@ -5,30 +5,88 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:цдовым.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Sotrudnik" ShowsNavigationUI="True">
-    <Page.Background>
-        <ImageBrush ImageSource="/Resourced/phon.png" TileMode="None" Stretch="Fill"/>
-    </Page.Background>
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="Кадровое агентство | Персонал" 
+      ShowsNavigationUI="False"
+    >
+
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="MenuButtonStyle">
+            <Setter Property="Background" Value="#2C3E50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid>
-        <!-- Определяем строки для кнопок -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <!-- Пространство сверху -->
-            <RowDefinition Height="Auto"/>
-            <!-- Кнопка 1 -->
-            <RowDefinition Height="Auto"/>
-            <!-- Кнопка 2 -->
-            <RowDefinition Height="Auto"/>
-            <!-- Кнопка 3 -->
-            <RowDefinition Height="*"/>
-            <!-- Пространство снизу -->
-        </Grid.RowDefinitions>
+         <!--Фон с полупрозрачным overlay--> 
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resourced/franchise-women-20180511v1.jpg" Stretch="UniformToFill"/>
+            <!--<ImageBrush ImageSource="/Resourced/phon.png" Stretch="UniformToFill"/>-->
+        </Grid.Background>
 
-        <!-- Кнопки размещены в одной колонке с отступами 10 dp -->
-        <Button x:Name="strlist" Content="Список сотрудников" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Width="342" Height="44" Click="strlist_Click" Background="#FF32B0B9" Foreground="White"/>
-        <!--<Button x:Name="kndlist" Content="Список клиентов" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" Width="342" Height="45" Background="#FF32B0B9" Foreground="White" Click="kndlist_Click"/>-->
-        <Button x:Name="vklist" Content="Отклики вакансии" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" Width="342" Height="45" Background="#FF32B0B9" Foreground="White" Click="vklist_Click"/>
+        <Rectangle Fill="#80000000" Opacity="0.7"/>
+
+        <!-- Основной контейнер -->
+        <Border Background="#FFF0F5F9" 
+                Width="350" 
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Left"
+                CornerRadius="0 10 10 0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Заголовок -->
+                <Border Background="#2C3E50" Padding="20" CornerRadius="0 0 5 5">
+                    <TextBlock Text="Кадровое агентство " 
+                               Foreground="White" 
+                               FontSize="20"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"/>
+                </Border>
+
+                <!-- Меню -->
+                <StackPanel Grid.Row="1" Margin="20" VerticalAlignment="Center">
+                    <TextBlock Text="Подберём эффективный персонал" Height="207" FontSize="19" Foreground="Black" />
+                        <Button x:Name="strlist" 
+                            Content="Список сотрудников" 
+                            Style="{StaticResource MenuButtonStyle}"
+                            Click="strlist_Click"/>
+
+                    <Button x:Name="vklist" 
+                            Content="Отклики на вакансии" 
+                            Style="{StaticResource MenuButtonStyle}"
+                            Click="vklist_Click"/>
+                </StackPanel>
+
+                <!-- Футер -->
+                <TextBlock Grid.Row="2" 
+                           Text="© 2025 Кадровое агентство" 
+                           Foreground="#7F8C8D"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
+            </Grid>
+        </Border>
     </Grid>
 </Page>
